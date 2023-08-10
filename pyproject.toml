@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "tg-polls"
+version = "0.1.0"
+description = ""
+authors = ["o.zamesov@mail.ru <o.zamesov@mail.ru>"]
+readme = "README.md"
+packages = [{include = "tg_polls"}]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+SQLAlchemy = "^2.0.19"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
