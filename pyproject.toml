@@ -9,6 +9,7 @@ packages = [{include = "tg_polls"}]
 [tool.poetry.dependencies]
 python = "^3.9"
 SQLAlchemy = "^2.0.19"
+pytest = "^7.4.0"
 
 
 [build-system]

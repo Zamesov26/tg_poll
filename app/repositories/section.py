@@ -29,8 +29,7 @@ class SectionRepository:
         for section in self.get_all_by_name(section_name):
             if section.subject is subject:
                 return section
-        section = SubjectSection(name=section_name)
-        subject.sections.append(section)
+        section = SubjectSection(name=section_name, subject=subject)
         self.session.add(section)
 
         return section

@@ -1,6 +1,4 @@
-from app.repositories.section import SectionRepository
-from app.repositories.subject import SubjectRepository
-from app.repositories.term import TermRepository
+from app.repositories import SectionRepository, SubjectRepository, TermRepository
 
 
 class UnitOfWork:

@@ -29,8 +29,7 @@ class TermRepository:
             if term.subject_section is section:
                 return term
 
-        term = Term(name=name)
-        section.terms.append(term)
+        term = Term(name=name, subject_section=section)
         self.session.add(term)
 
         return term
