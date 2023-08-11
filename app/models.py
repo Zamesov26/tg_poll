@@ -9,7 +9,7 @@ class Subject(Base):
     __tablename__ = 'subjects'
 
     id = Column(Integer, primary_key=True)
-    name = Column(String, nullable=False)
+    name = Column(String, nullable=True)
 
     sections = relationship('SubjectSection', back_populates='subject')
 
@@ -24,11 +24,17 @@ class SubjectSection(Base):
     __tablename__ = 'subject_sections'
 
     id = Column(Integer, primary_key=True)
-    name = Column(String, nullable=False)
+    name = Column(String, nullable=True)
     subject_id = Column(Integer, ForeignKey('subjects.id'), nullable=False)
 
     subject = relationship('Subject', back_populates='sections')
     terms = relationship('Term', back_populates='subject_section')
+
+    def __str__(self):
+        return "<Section (id={}, name={}, subject_name={})>".format(self.id, self.name, self.subject.name)
+
+    def __repr__(self):
+        return self.__str__()
 
 
 class Term(Base):
@@ -43,3 +49,9 @@ class Term(Base):
     image = Column(String)
 
     subject_section = relationship('SubjectSection', back_populates='terms')
+
+    def __str__(self):
+        return "<Term (id={}, name={}, section={})>".format(self.id, self.name, self.subject_section.name)
+
+    def __repr__(self):
+        return self.__str__()
