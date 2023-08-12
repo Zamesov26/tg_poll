@@ -1,4 +1,6 @@
-from app.repositories import SectionRepository, SubjectRepository, TermRepository
+from app.repositories import (
+    SectionRepository, SubjectRepository, TermRepository, QuestionRepository
+)
 
 
 class UnitOfWork:
@@ -7,6 +9,7 @@ class UnitOfWork:
         self.subject = SubjectRepository(session)
         self.section = SectionRepository(session)
         self.term = TermRepository(session)
+        self.question = QuestionRepository(session)
 
     def create_term(self, term_name, subject_name=None, section_name=None):
         subject = self.subject.get_or_create(subject_name)
