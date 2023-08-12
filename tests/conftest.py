@@ -3,7 +3,8 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
 from app.models import Base
-from app.repositories import SubjectRepository, SectionRepository, TermRepository
+from app.repositories import (SubjectRepository, SectionRepository,
+    TermRepository, QuestionRepository)
 
 
 @pytest.fixture(scope="function")
@@ -34,3 +35,8 @@ def section_repository(test_db_session):
 @pytest.fixture(scope="function")
 def term_repository(test_db_session):
     return TermRepository(session=test_db_session)
+
+
+@pytest.fixture(scope="function")
+def question_repository(test_db_session):
+    return QuestionRepository(session=test_db_session)

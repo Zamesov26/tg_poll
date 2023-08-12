@@ -11,6 +11,7 @@ class Subject(Base):
     name = Column(String, nullable=True)
 
     sections = relationship('SubjectSection', back_populates='subject')
+    questions = relationship('Question', back_populates='subject')
 
     def __str__(self):
         return "<class Subject(id={}, name={})>".format(self.id, self.name)
