@@ -1,6 +1,3 @@
-from app.models import Subject, Term
-
-
 def test_create_term(subject_repository, section_repository, term_repository):
     section_data = {
         "section_name": "some_section_name",
