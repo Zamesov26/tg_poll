@@ -5,3 +5,4 @@ from .term import Term
 from .question import Question
 from .question_type import QuestionType
 from .answer import Answer
+from .user import User

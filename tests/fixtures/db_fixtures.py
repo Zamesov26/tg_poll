@@ -5,7 +5,7 @@ from sqlalchemy.orm import sessionmaker
 from app.models import Base
 from app.repositories import (
     SubjectRepository, SectionRepository, TermRepository, QuestionRepository,
-    QuestionTypeRepository, AnswerRepository
+    QuestionTypeRepository, AnswerRepository, UserRepository
 )
 
 
@@ -67,3 +67,8 @@ def some_question(some_subject, question_repository, some_question_type):
 @pytest.fixture(scope="function")
 def answer_repository(test_db_session):
     return AnswerRepository(session=test_db_session)
+
+
+@pytest.fixture(scope="function")
+def user_repository(test_db_session):
+    return UserRepository(session=test_db_session)
