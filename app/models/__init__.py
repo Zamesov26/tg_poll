@@ -6,3 +6,4 @@ from .question import Question
 from .question_type import QuestionType
 from .answer import Answer
 from .user import User
+from .user_answer import UserAnswer

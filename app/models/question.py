@@ -13,6 +13,7 @@ class Question(Base):
     subject = relationship("Subject", back_populates="questions")
     answers = relationship("Answer", back_populates="question")
     question_type = relationship("QuestionType", back_populates="questions")
+    user_answers = relationship("UserAnswer", back_populates="question")
 
     def __repr__(self):
         return f"<Question(id={self.id}, text='{self.text}')>"

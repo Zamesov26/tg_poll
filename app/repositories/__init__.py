@@ -5,3 +5,4 @@ from .question import QuestionRepository
 from .question_type import QuestionTypeRepository
 from .answer import AnswerRepository
 from .user import UserRepository
+from .user_answer import UserAnswerRepository

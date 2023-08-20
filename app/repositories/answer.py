@@ -19,6 +19,12 @@ class AnswerRepository:
             .filter(Answer.question_id == question_id) \
             .all()
 
+    def get_answer_by_question_id_and_text(self, question_id: int, text: str):
+        return self.session \
+            .query(Answer) \
+            .filter(Answer.question_id == question_id, Answer.text == text) \
+            .first()
+
     def create_answer(self, question_id: int, text: str,
                       is_true: bool = False) -> Answer:
         new_answer = Answer(question_id=question_id,
@@ -35,6 +41,3 @@ class AnswerRepository:
             if answer == answer_text:
                 return answer
         return self.create_answer()
-
-
-
