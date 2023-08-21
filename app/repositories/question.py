@@ -8,9 +8,6 @@ class QuestionRepository:
 
     def create(self, text: str, subject):
         question = Question(text=text, subject=subject)
-        self.session.add(question)
-        self.session.commit()
-        self.session.refresh(question)
         return question
 
     def get_by_id(self, question_id: int):
@@ -32,15 +29,12 @@ class QuestionRepository:
         question = self.get_by_id(question_id)
         if question:
             question.text = new_text
-            self.session.commit()
-            self.session.refresh(question)
         return question
 
     def delete(self, question_id: int):
         question = self.get_by_id(question_id)
         if question:
             self.session.delete(question)
-            self.session.commit()
 
     def get_questions_by_subject(self, subject_id: int):
         return self.session \
@@ -56,4 +50,3 @@ class QuestionRepository:
         self.session.add(question)
 
         return question
-

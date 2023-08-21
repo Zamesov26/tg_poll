@@ -1,7 +1,8 @@
 def test_create_question(some_subject, question_repository):
     question_data = {
         "text": "some_question1",
-        "subject":  some_subject
+        "subject":  some_subject,
+        "question_type": 'text'
     }
 
     question = question_repository.get_or_create(**question_data)

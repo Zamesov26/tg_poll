@@ -1,3 +1,5 @@
+from typing import Optional
+
 from sqlalchemy.orm import Session
 
 from app.models import UserAnswer
@@ -15,10 +17,21 @@ class UserAnswerRepository:
             UserAnswer.user_id == user_id).all()
 
     def create_user_answer(self, user_id: int, question_id: int,
-                           answer_text: str, is_correct: bool):
-        user_answer = UserAnswer(user_id=user_id,
-                                 question_id=question_id,
-                                 answer_text=answer_text,
-                                 is_correct=is_correct)
+                           is_correct: bool = None,
+                           answer_text: Optional[str] = None,
+                           answer_lst: Optional[list] = None):
+        user_answer_data = {
+            'user_id': user_id,
+            'question_id': question_id,
+            'is_correct': is_correct
+        }
+
+        if answer_lst:
+            user_answer = UserAnswer(**user_answer_data,
+                                     selected_answers=answer_lst)
+        else:
+            user_answer = UserAnswer(**user_answer_data,
+                                     answer_text=answer_text)
+
         self.session.add(user_answer)
         return user_answer
