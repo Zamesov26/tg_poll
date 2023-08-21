@@ -14,4 +14,4 @@ class Answer(Base):
     question = relationship("Question", back_populates="answers")
 
     def __repr__(self):
-        return f"<Answer(id={self.id}, text='{self.text}', is_true={self.is_true}, type_id={self.type_id})>"
+        return f"<Answer(id={self.id}, question_id='{self.question_id}' text='{self.text}', is_true={self.is_true})>"

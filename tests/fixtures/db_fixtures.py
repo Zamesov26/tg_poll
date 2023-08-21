@@ -5,8 +5,7 @@ from sqlalchemy.orm import sessionmaker
 from app.models import Base
 from app.repositories import (
     SubjectRepository, SectionRepository, TermRepository, QuestionRepository,
-    QuestionTypeRepository, AnswerRepository, UserRepository,
-    UserAnswerRepository
+    AnswerRepository, UserRepository, UserAnswerRepository
 )
 
 
@@ -28,8 +27,8 @@ def subject_repository(test_db_session):
 
 
 @pytest.fixture(scope="function")
-def some_subject(subject_repository):
-    subject = subject_repository.get_or_create("some_subject")
+def subject_fixture(subject_repository):
+    subject = subject_repository.get_or_create("test_subject")
     return subject
 
 
@@ -44,38 +43,47 @@ def term_repository(test_db_session):
 
 
 @pytest.fixture(scope="function")
-def question_type_repository(test_db_session):
-    return QuestionTypeRepository(session=test_db_session)
-
-
-@pytest.fixture(scope="function")
-def some_question_type(question_type_repository):
-    question_type = question_type_repository.get_or_create(
-        'some_question_type')
-    return question_type
-
-
-@pytest.fixture(scope="function")
 def question_repository(test_db_session):
     return QuestionRepository(session=test_db_session)
 
 
 @pytest.fixture(scope="function")
-def some_question(some_subject, question_repository, some_question_type):
-    question = question_repository.get_or_create('some_question', some_subject)
-    some_question_type.questions.append(question)
+def text_question_fixture(question_repository):
+    question = question_repository.create('text_question',
+                                          question_type='text')
     return question
 
+
 @pytest.fixture(scope="function")
-def some_question_with_answers(some_question, answer_repository):
-    answers = [('вариант1', False), ('вариант2', True), ('вариант3', False),
+def single_question_fixture(question_repository, answer_repository):
+    question = question_repository.create('single_question',
+                                          question_type='single_question')
+
+    answers = [('вариант1', True), ('вариант2', False), ('вариант3', False),
                ('вариант4', False), ('вариант5', False), ('вариант6', False)]
 
     for text, is_true in answers:
-        answer_repository.create_answer(text=text, is_true=is_true,
-                                        question_id=some_question.id)
+        question.answers.append(
+            answer_repository.create_answer(text=text, is_true=is_true)
+        )
 
-    return some_question
+    return question
+
+
+@pytest.fixture(scope="function")
+def multiple_question_fixture(question_repository, answer_repository):
+    question = question_repository.create('multiple_question',
+                                          question_type='multiple_choice')
+
+    answers = [('вариант1', True), ('вариант2', True), ('вариант3', False),
+               ('вариант4', False), ('вариант5', False), ('вариант6', False)]
+
+    for text, is_true in answers:
+        question.answers.append(
+            answer_repository.create_answer(text=text, is_true=is_true)
+        )
+
+    return question
 
 
 @pytest.fixture(scope="function")
@@ -89,8 +97,8 @@ def user_repository(test_db_session):
 
 
 @pytest.fixture(scope="function")
-def some_user(user_repository):
-    user = user_repository.create_user(name='some_user', tg_id=1234)
+def user_fixture(user_repository):
+    user = user_repository.create_user(name='user_fixture', tg_id=1234)
     return user
 
 
