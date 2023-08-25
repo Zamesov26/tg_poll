@@ -55,22 +55,11 @@ def text_question_fixture(question_repository):
 
 
 @pytest.fixture(scope="function")
-<<<<<<< HEAD
 def single_question_fixture(question_repository, answer_repository):
     question = question_repository.create('single_question',
                                           question_type='single_question')
 
     answers = [('вариант1', True), ('вариант2', False), ('вариант3', False),
-=======
-def some_question_text(some_subject, question_repository, some_question_type):
-    question = question_repository.create('some_question', some_subject)
-    some_question_type.questions.append(question)
-    return question
-
-@pytest.fixture(scope="function")
-def some_question_with_answers(some_question, answer_repository):
-    answers = [('вариант1', False), ('вариант2', True), ('вариант3', False),
->>>>>>> 9b3ecbcba4e59beab0b922a44925d6d5923b2f22
                ('вариант4', False), ('вариант5', False), ('вариант6', False)]
 
     for text, is_true in answers:
