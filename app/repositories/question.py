@@ -20,8 +20,10 @@ class QuestionRepository:
     def get_all(self):
         return self.session.query(Question).all()
 
-    def get_questions_by_subject(self, subject_id: int):
+    def get_question_by_text_end_subject(self, subject_id: int,
+                                         question_text: str):
         return self.session \
             .query(Question) \
-            .filter(Question.subject_id == subject_id) \
-            .all()
+            .filter(Question.subject_id == subject_id,
+                    Question.text == question_text) \
+            .first()

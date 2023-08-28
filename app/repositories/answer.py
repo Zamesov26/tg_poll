@@ -17,7 +17,7 @@ class AnswerRepository:
             .filter(Answer.question_id == question_id, Answer.text == text) \
             .first()
 
-    def create_answer(self, text: str, is_true: bool = False) -> Answer:
+    def create(self, text: str, is_true: bool = False) -> Answer:
         new_answer = Answer(text=text,
                             is_true=is_true)
         self.session.add(new_answer)

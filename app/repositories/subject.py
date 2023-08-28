@@ -29,4 +29,5 @@ class SubjectRepository:
         if not subject:
             subject = Subject(name=name)
             self.session.add(subject)
+            self.session.commit()
         return subject

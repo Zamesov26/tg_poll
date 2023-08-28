@@ -64,7 +64,7 @@ def single_question_fixture(question_repository, answer_repository):
 
     for text, is_true in answers:
         question.answers.append(
-            answer_repository.create_answer(text=text, is_true=is_true)
+            answer_repository.create(text=text, is_true=is_true)
         )
 
     return question
@@ -80,7 +80,7 @@ def multiple_question_fixture(question_repository, answer_repository):
 
     for text, is_true in answers:
         question.answers.append(
-            answer_repository.create_answer(text=text, is_true=is_true)
+            answer_repository.create(text=text, is_true=is_true)
         )
 
     return question

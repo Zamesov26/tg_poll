@@ -24,7 +24,6 @@ class SectionRepository:
             .filter_by(name=section_name) \
             .all()
 
-
     def get_or_create(self, section_name, subject):
         for section in self.get_all_by_name(section_name):
             if section.subject is subject:
