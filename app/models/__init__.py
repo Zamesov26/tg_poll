@@ -6,3 +6,5 @@ from .question import Question
 from .answer import Answer
 from .user import User
 from .user_answer import UserAnswer
+from .user_state import UserState
+

@@ -5,7 +5,7 @@ from sqlalchemy.orm import sessionmaker
 from app.models import Base
 from app.repositories import (
     SubjectRepository, SectionRepository, TermRepository, QuestionRepository,
-    AnswerRepository, UserRepository, UserAnswerRepository
+    AnswerRepository, UserRepository, UserAnswerRepository, UserStateRepository
 )
 
 
@@ -105,3 +105,13 @@ def user_fixture(user_repository):
 @pytest.fixture(scope="function")
 def user_answer_repository(test_db_session):
     return UserAnswerRepository(session=test_db_session)
+
+
+@pytest.fixture(scope="function")
+def user_state_repository(test_db_session):
+    return UserStateRepository(session=test_db_session)
+
+@pytest.fixture(scope="function")
+def user_state_fixture(user_state_repository):
+    state = user_state_repository.create()
+    return state

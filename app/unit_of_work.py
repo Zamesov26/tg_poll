@@ -3,6 +3,7 @@ from typing import Tuple, Optional
 from app.repositories import (
     SectionRepository, SubjectRepository, TermRepository, QuestionRepository,
     UserAnswerRepository, UserRepository, AnswerRepository,
+    UserStateRepository,
 )
 
 
@@ -17,6 +18,7 @@ class UnitOfWork:
         self.answer = AnswerRepository(session)
         self.user = UserRepository(session)
         self.user_answer = UserAnswerRepository(session)
+        self.user_state = UserStateRepository(session)
 
     def create_term(self, term_name, subject_name=None, section_name=None):
         subject = self.subject.get_or_create(subject_name)
